@@ -268,7 +268,7 @@ def threshold_recommendation(t_values):
   if t_values[2] < 1:
     output += "you should decrease **social_distan** by **" + str(round((abs(1-t33) * 100), 1)) + "%**\n | "
   else:
-    output += "if you increase the **social state** by**" + str(round((abs(1-t33) * 100), 1)) + "%** you risk being over the critical threshold\n | "
+    output += "if you increase the **social state** by **" + str(round((abs(1-t33) * 100), 1)) + "%** you risk being over the critical threshold\n | "
 
   if t_values[3] < 1:
     output += "you should decrease **mental_exhaust** by **" + str(round((abs(1-t34) * 100), 1)) + "%**\n"
