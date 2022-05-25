@@ -174,6 +174,14 @@ user_input_df = pd.DataFrame(values, columns= ['q0001', 'q0002', 'q0003', 'q0005
 rate, resp = quick_diagnosis(user_input_df, "user")
 
 
+
+####### test
+
+# st.write("Test")
+
+# st.write(user_input_df.head())
+# st.write(user_input_df.head())
+
 st.header("Prediction")
 
 if resp == 1:
@@ -226,13 +234,13 @@ def optimal_recommendation(t_values):
       break
 
   if t_values[0] < 1:
-    output += 'you should **decrease** the *workload* by **' + str(round((abs(1-t1) * 100), 1)) + '%**\n | '
+    output += "you should **decrease** the *workload* by **" + str(round((abs(1-t1) * 100), 1)) + "%**\n | "
   if t_values[1] < 1:
-    output += 'you should **decrease** the *work intensity* by **' + str(round((abs(1-t2) * 100), 1)) + '%**\n | '
+    output += "you should **decrease** the *work intensity* by **" + str(round((abs(1-t2) * 100), 1)) + "%**\n | "
   if t_values[2] < 1:
-    output += 'you should **decrease** *social_distan* by **' + str(round((abs(1-t3) * 100), 1)) + '%**\n | '
+    output += "you should **decrease** *social_distan* by **" + str(round((abs(1-t3) * 100), 1)) + "%**\n | "
   if t_values[3] < 1:
-    output += 'you should **decrease** *mental_exhaust* by **' + str(round((abs(1-t4) * 100), 1)) + '%**\n'
+    output += "you should **decrease** *mental_exhaust* by **" + str(round((abs(1-t4) * 100), 1)) + "%**\n"
   
   if len(output) == 0:
     output = "No need to optimize anything"
@@ -252,24 +260,24 @@ def threshold_recommendation(t_values):
         output += '**Careful**:\n'
 
   if t_values[0] < 1:
-    output += 'you should decrease the **workload** by **' + str(round((abs(1-t31) * 100), 1)) + '%**\n | '
+    output += "you should decrease the **workload** by **" + str(round((abs(1-t31) * 100), 1)) + "%**\n | "
   else:
-    output += "if you increase the **workload** by **" + str(round((abs(1-t31) * 100), 1)) + '%** you risk being over the critical threshold\n | ' 
+    output += "if you increase the **workload** by **" + str(round((abs(1-t31) * 100), 1)) + "%** you risk being over the critical threshold\n | " 
 
   if t_values[1] < 1:
-    output += 'you should decrease the **work intensity** by **' + str(round((abs(1-t32) * 100), 1)) + '%**\n | '
+    output += "you should decrease the **work intensity** by **" + str(round((abs(1-t32) * 100), 1)) + "%**\n | "
   else:
-    output += "if you increase the **work intensity** by **" + str(round((abs(1-t32) * 100), 1)) + '%** you risk being over the critical threshold\n | '
+    output += "if you increase the **work intensity** by **" + str(round((abs(1-t32) * 100), 1)) + "%** you risk being over the critical threshold\n | "
 
   if t_values[2] < 1:
-    output += 'you should decrease **social_distan** by **' + str(round((abs(1-t33) * 100), 1)) + '%**\n | '
+    output += "you should decrease **social_distan** by **" + str(round((abs(1-t33) * 100), 1)) + "%**\n | "
   else:
-    output += "if you increase the **social state** by"** + str(round((abs(1-t33) * 100), 1)) + '%** you risk being over the critical threshold\n | '
+    output += "if you increase the **social state** by**" + str(round((abs(1-t33) * 100), 1)) + "%** you risk being over the critical threshold\n | "
 
   if t_values[3] < 1:
-    output += 'you should decrease **mental_exhaust** by **' + str(round((abs(1-t34) * 100), 1)) + '%**\n'
+    output += "you should decrease **mental_exhaust** by **" + str(round((abs(1-t34) * 100), 1)) + "%**\n"
   else:
-    output += "if you increase the **mental exhaust** by **" + str(round((abs(1-t34) * 100), 1)) + '%** you risk being over the critical threshold\n'
+    output += "if you increase the **mental exhaust** by **" + str(round((abs(1-t34) * 100), 1)) + "%** you risk being over the critical threshold\n"
   
   
   return output
