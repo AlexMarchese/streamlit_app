@@ -41,7 +41,7 @@ with st.expander("Work pace and quantity"):
     r1c3, r2c2, r2c3 = st.columns(3)
 
 with st.expander("Work-home interference"):
-    st.markdown("1: Always, 2: Often, 3: Sometimes, 4: Never")
+    st.markdown("1: Never, 2: Sometimes, 3: Often, 4: Always")
     r3c1, r3c2, r4c2 = st.columns(3)
     r3c3, r4c1, r5c1 = st.columns(3)
     r5c2, r4c3, r5c3 = st.columns(3)
