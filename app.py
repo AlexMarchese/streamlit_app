@@ -160,12 +160,13 @@ def quick_diagnosis(df, input="file"):
       resp = 1 
     else:
       resp = 0
+    df.loc[row, "burnout"] = resp
     
   if input == "user":
       rate = (diagnosis/7 * 100).round(2)
       return rate, resp
 
-  df.loc[row, "burnout"] = resp
+  
   return df
 
 values = [[q1, q2, q3, q5, q6, q31, q32, q37, q38, q39, q41, q42, q43, q44, q45, q46, q49, q53, q54, q55, q56, q59, q99]]
@@ -175,12 +176,7 @@ rate, resp = quick_diagnosis(user_input_df, "user")
 
 
 
-####### test
 
-# st.write("Test")
-
-# st.write(user_input_df.head())
-# st.write(user_input_df.head())
 
 st.header("Prediction")
 
@@ -332,3 +328,18 @@ if t1 < 1 or  t2 < 1 or  t3 < 1 or t4 < 1:
     st.write(f"Burn out **rate** of **{rate} %**")
 
 
+st.write("##")
+st.header("Prediction on your own file")
+
+uploaded_data = st.file_uploader("Choose a CSV file to on which to run the burnout prediction on")
+
+if uploaded_data is not None:
+
+  new_employees = pd.read_csv(uploaded_data)
+  # st.write(new_employees)
+
+  new_employees_pred = quick_diagnosis(new_employees)
+
+  st.write(new_employees_pred.head())
+
+  st.download_button("Download data with the made predictions", data = new_employees_pred.to_csv().encode("utf-8"), file_name = "Data with predictions.csv")
