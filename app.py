@@ -13,7 +13,7 @@ st.set_page_config(
     
 )
 
-st.title("BurnApp")
+st.title("BurnApp 🔥🧠")
 st.markdown("""This app will help you understand what is the mental health situation of your employees, and whether you should take preventive measures to avoid  potential burnouts of your employees. 
 The employee should complete the following questionary, and recommendations will be based on those answers. """)
 
@@ -36,18 +36,18 @@ They should be as objective as possible to increase the quality of the recommend
 
 
 with st.expander("Work pace and quantity"):
-    st.markdown("1:Always, 2:Often, 3:Sometimes, 4:Never")
+    st.markdown("1: Never, 2: Sometimes, 3: Often, 4: Always")
     r1c1, r1c2, r2c1 = st.columns(3)
     r1c3, r2c2, r2c3 = st.columns(3)
 
 with st.expander("Work-home interference"):
-    st.markdown("1:Always, 2:Often, 3:Sometimes, 4:Never")
+    st.markdown("1: Always, 2: Often, 3: Sometimes, 4: Never")
     r3c1, r3c2, r4c2 = st.columns(3)
     r3c3, r4c1, r5c1 = st.columns(3)
     r5c2, r4c3, r5c3 = st.columns(3)
 
 with st.expander("The burnout questionnaire"):
-    st.markdown("1:Never, 2:Sporadic, 3:Occasionally, 4:Regularly, 5:Often, 6:Very often, 7:Always")
+    st.markdown("1: Never, 2: Sporadic, 3: Occasionally, 4: Regularly, 5: Often, 6: Very often, 7: Always")
     r6c1, r6c2, r7c3 = st.columns(3)
     r7c1, r7c2, r6c3 = st.columns(3)
     r8c1, r8c2, r8c3 = st.columns(3)
@@ -109,9 +109,11 @@ q59 = r8c3.slider("I feel at the end of my Latin", 1, 7, 4)
 
 #Demographic data
 # st.markdown("1 = <30, 2 = 30-40, 3 = 41-50, 4 = 51-60, 5 = >60")
+st.write("##")
+st.write("How many hours do you work per week on average? ")
 r9c1, r9c2, r9c3 = st.columns(3)
 # q99 = r9c1.slider("How many hours do you work per week on average?", ['<30', '30-40', '41-50', '51-60', '>60'], 3)
-q99 = r9c1.slider("How many hours do you work per week on average? [1 = <30, 2 = 30-40, 3 = 41-50, 4 = 51-60, 5 = >60]", 1, 5, 3)
+q99 = r9c1.slider("[1 = <30, 2 = 30-40, 3 = 41-50, 4 = 51-60, 5 = >60]", 1, 5, 3)
 
 
 # with st.expander("Open to see how to use the App"):
@@ -172,13 +174,14 @@ user_input_df = pd.DataFrame(values, columns= ['q0001', 'q0002', 'q0003', 'q0005
 rate, resp = quick_diagnosis(user_input_df, "user")
 
 
+st.header("Prediction")
 
 if resp == 1:
-    st.write("Your employee is over the critical threshold of burn out")
+    st.write("Your employee is **over** the critical threshold of burn out")
 else:
-    st.write("Your employee is under the critical threshold of burn out")
+    st.write("Your employee is **under** the critical threshold of burn out")
 
-st.write(f"Burn out rate of {rate} %")
+st.write(f"Burn out **rate** of **{rate} %**")
 
 
 
@@ -219,17 +222,17 @@ def optimal_recommendation(t_values):
   output = ''
   for value in t_values:
     if value <= 1:
-      output += 'Optimally:\n'
+      output += '**Optimally:**\n'
       break
 
   if t_values[0] < 1:
-    output += 'you should decrease the workload by ' + str(round((abs(1-t1) * 100), 1)) + '%\n | '
+    output += 'you should **decrease** the *workload* by **' + str(round((abs(1-t1) * 100), 1)) + '%**\n | '
   if t_values[1] < 1:
-    output += 'you should decrease the work intensity by ' + str(round((abs(1-t2) * 100), 1)) + '%\n | '
+    output += 'you should **decrease** the *work intensity* by **' + str(round((abs(1-t2) * 100), 1)) + '%**\n | '
   if t_values[2] < 1:
-    output += 'you should decrease social_distan by ' + str(round((abs(1-t3) * 100), 1)) + '%\n | '
+    output += 'you should **decrease** *social_distan* by **' + str(round((abs(1-t3) * 100), 1)) + '%**\n | '
   if t_values[3] < 1:
-    output += 'you should decrease mental_exhaust by ' + str(round((abs(1-t4) * 100), 1)) + '%\n'
+    output += 'you should **decrease** *mental_exhaust* by **' + str(round((abs(1-t4) * 100), 1)) + '%**\n'
   
   if len(output) == 0:
     output = "No need to optimize anything"
@@ -242,31 +245,31 @@ def threshold_recommendation(t_values):
   output = ''
   for value in t_values:
     if value <= 1:
-      output += 'Critically:\n'  
+      output += '**Critically:**\n'  
       break
 
     if len(output) == 0:
-        output += 'Careful:\n'
+        output += '**Careful**:\n'
 
   if t_values[0] < 1:
-    output += 'you should decrease the workload by ' + str(round((abs(1-t31) * 100), 1)) + '%\n | '
+    output += 'you should decrease the **workload** by **' + str(round((abs(1-t31) * 100), 1)) + '%**\n | '
   else:
-    output += "if you increase the workload by " + str(round((abs(1-t31) * 100), 1)) + '% you risk being over the critical threshold\n | ' 
+    output += "if you increase the **workload** by **" + str(round((abs(1-t31) * 100), 1)) + '%** you risk being over the critical threshold\n | ' 
 
   if t_values[1] < 1:
-    output += 'you should decrease the work intensity by ' + str(round((abs(1-t32) * 100), 1)) + '%\n | '
+    output += 'you should decrease the **work intensity** by **' + str(round((abs(1-t32) * 100), 1)) + '%**\n | '
   else:
-    output += "if you increase the work intensity by " + str(round((abs(1-t32) * 100), 1)) + '% you risk being over the critical threshold\n | '
+    output += "if you increase the **work intensity** by **" + str(round((abs(1-t32) * 100), 1)) + '%** you risk being over the critical threshold\n | '
 
   if t_values[2] < 1:
-    output += 'you should decrease social_distan by ' + str(round((abs(1-t33) * 100), 1)) + '%\n | '
+    output += 'you should decrease **social_distan** by **' + str(round((abs(1-t33) * 100), 1)) + '%**\n | '
   else:
-    output += "if you increase the social state by" + str(round((abs(1-t33) * 100), 1)) + '% you risk being over the critical threshold\n | '
+    output += "if you increase the **social state** by"** + str(round((abs(1-t33) * 100), 1)) + '%** you risk being over the critical threshold\n | '
 
   if t_values[3] < 1:
-    output += 'you should decrease mental_exhaust by ' + str(round((abs(1-t34) * 100), 1)) + '%\n'
+    output += 'you should decrease **mental_exhaust** by **' + str(round((abs(1-t34) * 100), 1)) + '%**\n'
   else:
-    output += "if you increase the mental exhaust by " + str(round((abs(1-t34) * 100), 1)) + '% you risk being over the critical threshold\n'
+    output += "if you increase the **mental exhaust** by **" + str(round((abs(1-t34) * 100), 1)) + '%** you risk being over the critical threshold\n'
   
   
   return output
@@ -275,12 +278,12 @@ def threshold_recommendation(t_values):
 opt_recommendation = optimal_recommendation([t1, t2, t3, t4])
 thresh_recommendation = threshold_recommendation([t31, t32, t33, t34])
 
-st.write([t1, t2, t3, t4])
+# st.write([t1, t2, t3, t4])
 # st.write([t31, t32, t33, t34])
+st.header("Prevention")
 st.write(opt_recommendation)
 st.write(thresh_recommendation)
-
-st.write("\n")
+st.write("##")
 
 ### Rediagnosis only if t1, t2, t3, t4 < 1
 
@@ -306,18 +309,18 @@ if t1 < 1 or  t2 < 1 or  t3 < 1 or t4 < 1:
     red1, red2 = st.columns(2)
     red3, red4 = st.columns(2)
 
-    tone = red1.slider("How much do you want to change the workload variable?", -0.9, 0.9, 0.1)
-    ttwo = red2.slider("How much do you want to change the work intensity variable?", -0.9, 0.9, 0.1)
-    tthree = red3.slider("How much do you want to change the social distanciation variable?", -0.9, 0.9, 0.1)
-    tfour = red4.slider("How much do you want to change the mental exhaustion variable?", -0.9, 0.9, 0.1)
+    tone = red1.slider("How much do you want to change the workload variable? (e.g. 0.5 = 50%)", -0.9, 0.9, 0.1)
+    ttwo = red2.slider("How much do you want to change the work intensity variable? (e.g. 0.5 = 50%)", -0.9, 0.9, 0.1)
+    tthree = red3.slider("How much do you want to change the social distanciation variable? (e.g. 0.5 = 50%)", -0.9, 0.9, 0.1)
+    tfour = red4.slider("How much do you want to change the mental exhaustion variable? (e.g. 0.5 = 50%)", -0.9, 0.9, 0.1)
 
     resp, rate = rediagnosis(tone, ttwo, tthree, tfour)
 
     if resp == 1:
-        st.write("Your employee is over the critical threshold of burn out")
+        st.write("Your employee is **over** the critical threshold of burn out")
     else:
-        st.write("Your employee is under the critical threshold of burn out")
+        st.write("Your employee is **under** the critical threshold of burn out")
 
-    st.write(f"Burn out rate of {rate} %")
+    st.write(f"Burn out **rate** of **{rate} %**")
 
 
